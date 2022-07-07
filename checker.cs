@@ -14,7 +14,7 @@ class Checker
     static bool BatteryIsOk(float temperature, float state_of_charge, float chargeRate) 
     {
         //bool battery_status = ValidateTemperature(temperature) ? ValidateStateOfCharge(state_of_charge) ? ValidateChargeRate(chargeRate) ? true:false:false:false;
-        bool battery_status = ValidateTemperatureAndStateOfCharge(temperature,soc) ? (ValidateChargeRate(cr) ? true:false):false;            
+        bool battery_status = ValidateTemperatureAndStateOfCharge(temperature,state_of_charge) ? (ValidateChargeRate(chargeRate) ? true:false):false;            
         return battery_status;       
     }    
     
