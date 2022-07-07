@@ -80,13 +80,14 @@ class Checker
         ExpectTrue(BatteryIsOk(0,70,0.5f));
         ExpectTrue(BatteryIsOk(30,70,-0.5f));
         ExpectTrue(BatteryIsOk(30,20,0.25f));
+        Console.WriteLine("All ok");
                  
         ExpectFalse(BatteryIsOk(50, 85, 0.0f));
         ExpectFalse(BatteryIsOk(-2, 85, 0.0f));
         ExpectFalse(BatteryIsOk(30, 80, 0.0f));
         ExpectFalse(BatteryIsOk(30, 10, 0.0f));
         ExpectFalse(BatteryIsOk(30, 10, 10.0f));
-        Console.WriteLine("All ok");
+        
         return 0;
     }
 }
