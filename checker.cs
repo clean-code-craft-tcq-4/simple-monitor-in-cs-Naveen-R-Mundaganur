@@ -11,8 +11,11 @@ class Checker
     const float charge_rate=0.8f;
     static bool system_output=false;
     
-    static bool BatteryIsOk(float temperature, float state_of_charge, float chargeRate) {
-        if(!ValidateTemperate(temperature)) 
+    static bool BatteryIsOk(float temperature, float state_of_charge, float chargeRate) 
+    {
+        bool battery_status = ValidateTemperature(temperature) ? ValidateStateOfCharge(state_of_charge) ? ValidateChargeRate(chargeRate) ? true:false:false:false;
+        return battery_status;
+        /*if(!ValidateTemperate(temperature)) 
         {
             Console.WriteLine("Temperature is out of range!");
             return false;
@@ -28,19 +31,28 @@ class Checker
             return false;
         }
         return true;
+        */
     }
     
     //Validate System Temperature
-    static bool ValidateTemperate(float temperature_data)
+    static bool ValidateTemperature(float temperature_data)
     {            
-        system_output = temperature_data < temp_min || temperature_data > temp_max ? false : true;                
+        system_output = temperature_data < temp_min || temperature_data > temp_max ? false : true;      
+        if(!system_output)
+        {
+            Console.WriteLine("Temperature is out of range!");
+        }
         return system_output;
     }
     
     //Validate System State of Charge
     static bool ValidateStateOfCharge(float soc_input)
-    {            
-       system_output = soc_input < soc_min || soc_input > soc_max ? false : true;
+    {                 
+        system_output = soc_input < soc_min || soc_input > soc_max ? false : true;
+        if(!system_output)
+        {
+            Console.WriteLine("State of Charge is out of range!");
+        }
        return system_output;
     }
 
@@ -48,6 +60,10 @@ class Checker
     static bool ValidateChargeRate(float charge_state_data)
     {            
         system_output = charge_state_data > charge_rate ? false : true;
+        if(!system_output)
+        {
+            Console.WriteLine("Charge Rate is out of range!");
+        }
         return system_output;
     }
         
