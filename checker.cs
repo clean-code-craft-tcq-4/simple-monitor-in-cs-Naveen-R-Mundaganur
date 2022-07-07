@@ -12,8 +12,7 @@ class Checker
     static bool system_output=false;
     
     static bool BatteryIsOk(float temperature, float state_of_charge, float chargeRate) 
-    {
-        //bool battery_status = ValidateTemperature(temperature) ? ValidateStateOfCharge(state_of_charge) ? ValidateChargeRate(chargeRate) ? true:false:false:false;
+    {        
         bool battery_status = ValidateTemperatureAndStateOfCharge(temperature,state_of_charge) ? (ValidateChargeRate(chargeRate) ? true:false):false;            
         return battery_status;       
     }    
@@ -21,14 +20,14 @@ class Checker
     //Validate System Temperature and System of Charge
      static bool ValidateTemperatureAndStateOfCharge(float temperature_data, float soc)
     {            
-            if (!ValidateData(temperature_data))
+            if (!ValidateData(temperature_data,temp_min,temp_max))
             {
                 Console.WriteLine("Temperature is out of range!");
                 return false;
             }
             else
             {
-                if (!ValidateData(soc))
+                if (!ValidateData(soc,soc_min,soc_max))
                 {
                     Console.WriteLine("State of Charge is out of range!");
                     return false;
@@ -51,9 +50,10 @@ class Checker
         return system_output;
     }
     
-    static bool ValidateData(float input)
+    //Validate System Parameters
+    static bool ValidateData(float input, float minimum_data,float maximum_data)
         {
-            system_output = input < temp_min || input > temp_max ? false : true;
+            system_output = input < minimum_data || input > maximum_data ? false : true;
             return system_output;
         }
         
