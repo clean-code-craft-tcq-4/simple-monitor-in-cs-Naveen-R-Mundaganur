@@ -7,7 +7,7 @@ class Checker
     const float temp_min= 0;
     const float temp_max=45;
     const float soc_min=20;
-    const float soc_max=70;
+    const float soc_max=80;
     const float charge_rate=0.8f;
     static bool system_output=false;
     
@@ -78,13 +78,12 @@ class Checker
         ExpectTrue(BatteryIsOk(25, 70, 0.7f));
         ExpectTrue(BatteryIsOk(45,55,0.5f));
         ExpectTrue(BatteryIsOk(0,70,0.5f));
-        ExpectTrue(BatteryIsOk(30,70,-0.5f));
+        ExpectTrue(BatteryIsOk(30,80,-0.5f));
         ExpectTrue(BatteryIsOk(30,20,0.25f));
         Console.WriteLine("All ok");
                  
         ExpectFalse(BatteryIsOk(50, 85, 0.0f));
-        ExpectFalse(BatteryIsOk(-2, 85, 0.0f));
-        ExpectFalse(BatteryIsOk(30, 80, 0.0f));
+        ExpectFalse(BatteryIsOk(-2, 85, 0.0f));        
         ExpectFalse(BatteryIsOk(30, 10, 0.0f));
         ExpectFalse(BatteryIsOk(30, 10, 10.0f));
         
